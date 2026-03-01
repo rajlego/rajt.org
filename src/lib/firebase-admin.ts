@@ -36,6 +36,6 @@ export const db: Firestore = new Proxy({} as Firestore, {
     if (!_db) {
       _db = getFirestore(getApp());
     }
-    return (_db as Record<string | symbol, unknown>)[prop];
+    return (_db as unknown as Record<string | symbol, unknown>)[prop];
   },
 });

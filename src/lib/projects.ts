@@ -20,7 +20,7 @@ export interface Project {
 }
 
 // Ordered by rank (coolest first)
-export const projects: Project[] = [
+export const projects: Project[] = ([
   {
     name: "Tanmatsu",
     tagline: "Terminal manager for Claude Code",
@@ -206,7 +206,7 @@ export const projects: Project[] = [
     icon: "\u{2328}\uFE0F",
     color: "#0EA5E9",
   },
-].sort((a, b) => a.rank - b.rank);
+] satisfies Project[]).sort((a, b) => a.rank - b.rank);
 
 export const interests = [
   {
