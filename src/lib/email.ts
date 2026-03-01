@@ -1,12 +1,18 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let _resend: Resend | null = null;
+function getResend(): Resend {
+  if (!_resend) {
+    _resend = new Resend(process.env.RESEND_API_KEY);
+  }
+  return _resend;
+}
 
 export async function sendAccessRequestNotification(
   email: string,
   name?: string
 ) {
-  await resend.emails.send({
+  await getResend().emails.send({
     from: process.env.RESEND_FROM_EMAIL!,
     to: process.env.ADMIN_EMAIL!,
     subject: `New access request: ${email}`,
@@ -18,7 +24,7 @@ export async function sendAccessRequestNotification(
 }
 
 export async function sendApprovalEmail(email: string) {
-  await resend.emails.send({
+  await getResend().emails.send({
     from: process.env.RESEND_FROM_EMAIL!,
     to: email,
     subject: "You've been approved — rajt.org",
