@@ -276,10 +276,10 @@ function Terminal() {
 }
 
 function Bento() {
-  const featured = projects.filter((p) => p.category === "featured");
-  const tools = projects.filter((p) => p.category === "tool");
+  const featured = projects.filter((p) => p.rank <= 3);
+  const tools = projects.filter((p) => p.rank > 3 && p.category === "tool");
   const rest = projects.filter(
-    (p) => p.category !== "featured" && p.category !== "tool"
+    (p) => p.rank > 3 && p.category !== "tool"
   );
 
   return (
